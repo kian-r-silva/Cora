@@ -37,6 +37,34 @@ const Home = () => {
         };
     }, [scrolled]);
     
+    // Prevent scrolling when menu is open
+    useEffect(() => {
+        if (menuOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [menuOpen]);
+    
+    // Add ESC key support to close the menu
+    useEffect(() => {
+        const handleEsc = (event) => {
+            if (event.keyCode === 27) {
+                setMenuOpen(false);
+            }
+        };
+        
+        document.addEventListener('keydown', handleEsc);
+        
+        return () => {
+            document.removeEventListener('keydown', handleEsc);
+        };
+    }, []);
+    
     return (
         <>
             <Head>
@@ -50,7 +78,7 @@ const Home = () => {
                     <div className={styles.navbarLeft}>Cora Colvin</div>
                     
                     <button 
-                        className={styles.mobileMenuBtn} 
+                        className={`${styles.mobileMenuBtn} ${menuOpen ? styles.open : ''}`} 
                         onClick={() => setMenuOpen(!menuOpen)}
                         aria-label="Toggle menu"
                     >
@@ -59,9 +87,20 @@ const Home = () => {
                         <span></span>
                     </button>
                     
+                    {/* Add overlay div for mobile */}
+                    <div 
+                        className={`${styles.menuOverlay} ${menuOpen ? styles.open : ''}`} 
+                        onClick={() => setMenuOpen(false)}
+                    ></div>
+                    
                     <div className={`${styles.navbarRight} ${menuOpen ? styles.open : ''}`}>
                         {navLinks.map(link => (
-                            <a key={link.name} href={link.href} className={styles.navbarLink}>
+                            <a 
+                                key={link.name} 
+                                href={link.href} 
+                                className={styles.navbarLink}
+                                onClick={() => setMenuOpen(false)} // Close menu when link is clicked
+                            >
                                 {link.name}
                             </a>
                         ))}

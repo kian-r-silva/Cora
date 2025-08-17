@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
+import { FaInstagram, FaPinterest, FaLinkedin } from 'react-icons/fa';
 
 const imageFiles = [
     'Cora BFast.jpeg',
@@ -11,18 +12,6 @@ const imageFiles = [
 
 function ImageCarousel({ images }) {
     const [current, setCurrent] = useState(0);
-    const [isMobile, setIsMobile] = useState(false);
-    
-    // Responsive behavior detection
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
     
     const next = () => setCurrent((current + 1) % images.length);
     const prev = () => setCurrent((current - 1 + images.length) % images.length);
@@ -72,11 +61,42 @@ const Hero = () => {
                 <h1 className={styles.heroOpeningTitle}>Cora Belle Colvin</h1>
                 <h2 className={styles.heroOpeningSubtitle}>Private Chef</h2>
                 <p className={styles.heroOpeningLocation}>Los Angeles, CA | New York, NY</p>
+                
+                {/* Social Media Links with React Icons */}
+                <div className={styles.socialLinks}>
+                    <a 
+                        href="https://www.instagram.com/coraacolvin/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                        aria-label="Instagram"
+                    >
+                        <FaInstagram className={styles.socialIcon} />
+                    </a>
+                    <a 
+                        href="https://www.pinterest.com/cora_colvin/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                        aria-label="Pinterest"
+                    >
+                        <FaPinterest className={styles.socialIcon} />
+                    </a>
+                    <a 
+                        href="https://www.linkedin.com/in/cora-colvin-233172267/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className={styles.socialLink}
+                        aria-label="LinkedIn"
+                    >
+                        <FaLinkedin className={styles.socialIcon} />
+                    </a>
+                </div>
+                
                 <blockquote className={styles.heroQuote}>
                     "To be a good cook you have to have a love of the good, a love of hard work, and a love of creating."<br />
                     <span className={styles.heroQuoteAuthor}>– Julia Child</span>
                 </blockquote>
-                <a href="#contact" className={styles.ctaButton}>Book a Consultation</a>
             </div>
             <div className={styles.carouselFrame}>
                 <ImageCarousel images={imageFiles} />

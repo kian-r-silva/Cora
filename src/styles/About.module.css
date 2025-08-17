@@ -205,18 +205,33 @@
     gap: var(--spacing-lg);
   }
   
+  /* Keep the original order (text, image, text, image) */
+  .bioSection .bioImage {
+    order: 1; /* Image comes after text in first section */
+  }
+  
   .bioSection.reversed .bioImage {
-    order: -1;
+    order: 1; /* Image comes after text in second section too */
   }
   
   .bioContent {
     padding: 0;
+    order: 0; /* Text always comes first */
   }
   
+  /* Scale down images without zoom effects */
   .portraitImage,
   .secondaryImage {
-    max-height: 500px;
-    width: 100%;
+    max-height: 400px;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    object-fit: contain; /* Use contain to avoid cropping */
+  }
+  
+  /* Disable hover transform effects on mobile */
+  .bioImage:hover img {
+    transform: none !important;
   }
 }
 

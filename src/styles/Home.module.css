@@ -5,7 +5,7 @@
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-  padding-top: 70px; /* Add padding equal to navbar height */
+  padding-top: 90px; /* Match the navbar height */
 }
 
 /* Navbar styles */
@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-md) 5%;
+  padding: 1.25rem 5%; /* Increased from 1rem (var(--spacing-md)) */
   background-color: var(--color-bg);
   border-bottom: 1px solid rgba(107, 77, 50, 0.1);
   position: fixed; /* Change from sticky to fixed for guaranteed stickiness */
@@ -23,10 +23,16 @@
   width: 100%;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  height: 90px; /* Set explicit height for larger navbar */
+}
+
+.navbarScrolled {
+  padding: 0.75rem 5%; /* Smaller when scrolled but still larger than original */
+  height: 70px; /* Slightly smaller when scrolled */
 }
 
 .navbarLeft {
-  font-size: var(--font-size-xl);
+  font-size: 1.8rem; /* Increased from 1.5rem (var(--font-size-xl)) */
   font-weight: 500;
   letter-spacing: 1px;
   font-family: 'Playfair Display', serif;
@@ -35,14 +41,15 @@
 
 .navbarRight {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: 2.5rem; /* Increased from 2rem (var(--spacing-lg)) */
 }
 
 .navbarLink {
   text-decoration: none;
   color: var(--color-text);
-  font-size: var(--font-size-base);
+  font-size: 1.15rem; /* Increased from 1rem */
   transition: color var(--transition-speed) ease;
+  font-weight: 500; /* Made slightly bolder */
 }
 
 .navbarLink:hover {
@@ -59,17 +66,31 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  z-index: 10;
+  z-index: 1001; /* Higher z-index to stay above the slide-in menu */
 }
 
 .mobileMenuBtn span {
   width: 100%;
   height: 3px;
-  background-color: var(--color-primary); /* Green for menu button */
-  transition: all var(--transition-speed) ease;
+  background-color: var(--color-secondary);
+  transition: all 0.3s ease;
+  border-radius: 3px;
 }
 
-/* Hero and Carousel layout - using modern CSS Grid for more flexibility */
+/* Hamburger to X animation */
+.mobileMenuBtn.open span:first-child {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.mobileMenuBtn.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobileMenuBtn.open span:last-child {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Hero and Carousel layout */
 .heroCarouselSection {
   display: grid;
   grid-template-columns: 45% 55%;
@@ -79,13 +100,16 @@
   max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 5%;
+  position: relative;
 }
 
+/* Hero content styles */
 .heroOverlayFrame {
   padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  z-index: 2;
 }
 
 .carouselFrame {
@@ -97,27 +121,26 @@
   padding: var(--spacing-lg);
 }
 
-/* Hero content styles */
 .heroOpeningTitle {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 5vw, var(--font-size-3xl));
   margin-bottom: var(--spacing-xs);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--color-secondary); /* Brown for main title */
+  color: var(--color-secondary);
 }
 
 .heroOpeningSubtitle {
   font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-xl));
   margin-bottom: var(--spacing-md);
   font-weight: 600;
-  color: var(--color-primary); /* Green for subtitle */
+  color: var(--color-primary);
 }
 
 .heroOpeningLocation {
   font-size: var(--font-size-base);
   margin-bottom: var(--spacing-lg);
-  color: var(--color-text-light); /* Medium brown for location */
+  color: var(--color-text-light);
 }
 
 .heroQuote {
@@ -127,7 +150,7 @@
   margin: var(--spacing-lg) 0;
   font-size: clamp(var(--font-size-base), 2vw, var(--font-size-lg));
   line-height: 1.6;
-  background: rgba(106, 140, 175, 0.1); /* Very light blue background */
+  background: rgba(106, 140, 175, 0.1);
   padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--border-radius-md);
 }
@@ -137,17 +160,18 @@
   margin-top: var(--spacing-sm);
   font-weight: 500;
   color: var(--color-text-light);
+  text-align: right;
 }
 
 .ctaButton {
   display: inline-block;
   padding: var(--spacing-sm) var(--spacing-lg);
-  background-color: var(--color-primary); /* Green button */
+  background-color: var(--color-primary);
   color: white;
   text-decoration: none;
   border-radius: 2rem;
   font-size: var(--font-size-base);
-  transition: all 0.3s ease;
+  transition: all var(--transition-speed) ease;
   text-align: center;
   max-width: 220px;
   font-weight: 600;
@@ -155,8 +179,9 @@
 }
 
 .ctaButton:hover {
-  background-color: var(--color-primary-light); /* Lighter green on hover */
+  background-color: var(--color-primary-light);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* Carousel styles */
@@ -171,7 +196,7 @@
 
 .carouselImageContainer {
   width: 100%;
-  aspect-ratio: 3/4;
+  aspect-ratio: 3/4; /* Changed from 4/3 to 3/4 for portrait orientation */
   overflow: hidden;
   border-radius: var(--border-radius-lg);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
@@ -189,14 +214,13 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(249, 245, 240, 0.7); /* Semi-transparent cream */
-  color: var(--color-secondary); /* Brown arrows */
+  background-color: rgba(255, 255, 255, 0.7);
   border: none;
   width: 40px;
   height: 40px;
   border-radius: 50%;
   font-size: var(--font-size-lg);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -205,7 +229,7 @@
 }
 
 .carouselBtn:hover {
-  background-color: var(--color-bg); /* Solid cream on hover */
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .left {
@@ -224,40 +248,161 @@
 
 .indicator {
   cursor: pointer;
-  color: var(--color-bg-alt); /* Darker cream for inactive indicators */
+  color: var(--color-accent-light);
   transition: color var(--transition-speed) ease;
 }
 
 .active {
-  color: var(--color-primary); /* Green for active indicator */
+  color: var(--color-primary);
 }
 
-/* Comprehensive responsive design */
-@media (max-width: 1200px) {
-  .heroCarouselSection {
-    grid-template-columns: 1fr 1fr;
-  }
+/* Social Media Links - updated for larger icons */
+.socialLinks {
+  display: flex;
+  justify-content: left;
+  gap: var(--spacing-xl); /* Increased spacing between icons */
+  margin: var(--spacing-md) 0 var(--spacing-lg);
 }
 
-@media (max-width: 992px) {
-  .heroCarouselSection {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    gap: var(--spacing-lg);
-    padding: var(--spacing-md) 5%;
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary); /* Brown color for icons */
+  background-color: rgba(255, 255, 255, 0.7);
+  width: 50px; /* Fixed width */
+  height: 50px; /* Fixed height for circular shape */
+  border-radius: 50%; /* Make icons circular */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.socialLink:hover {
+  transform: translateY(-3px);
+  background-color: white;
+  color: var(--color-primary); /* Green on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.socialIcon {
+  font-size: 1.75rem; /* Significantly larger icon size */
+}
+
+/* Adjust responsiveness for mobile */
+@media (max-width: 768px) {
+  .socialLinks {
+    margin: var(--spacing-md) 0 var(--spacing-lg);
   }
   
-  .heroOverlayFrame {
-    order: 1;
-    padding: var(--spacing-md) 0;
+  .socialLink {
+    width: 60px; /* Even larger on mobile for easier tapping */
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .socialIcon {
+    font-size: 2rem; /* Slightly larger on mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .socialLinks {
+    gap: var(--spacing-lg); /* Adjust spacing on smallest screens */
+  }
+}
+
+/* Mobile responsiveness with overlay hero */
+@media (max-width: 768px) {
+  .heroCarouselSection {
+    display: block;
+    position: relative;
+    min-height: 100vh;
+    padding: 0;
   }
   
   .carouselFrame {
-    order: 0;
-    padding: var(--spacing-md) 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    z-index: 1;
+  }
+  
+  .carouselImageContainer {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset;
+    border-radius: 0;
+  }
+  
+  .heroOverlayFrame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background-color: rgba(249, 245, 240, 0.8); /* Made slightly more opaque */
+    padding: var(--spacing-lg) 5%;
+    text-align: center;
+  }
+  
+  .heroOpeningTitle {
+    font-size: 2.5rem; /* Increased size */
+    margin-bottom: var(--spacing-md); /* More space below */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8); /* Text shadow for better readability */
+  }
+  
+  .heroOpeningSubtitle {
+    font-size: 1.5rem; /* Increased size */
+    margin-bottom: var(--spacing-md); /* More space */
+  }
+  
+  .heroOpeningLocation {
+    font-size: 1.1rem; /* Slightly larger */
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .heroQuote {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem; /* Slightly larger */
+    margin: var(--spacing-lg) 0;
+  }
+  
+  .ctaButton {
+    margin: var(--spacing-lg) auto 0;
+    font-size: 1.1rem; /* Larger button text */
+    padding: var(--spacing-md) var(--spacing-xl); /* Larger button */
+  }
+  
+  /* Hide carousel navigation arrows */
+  .carouselBtn {
+    display: none;
+  }
+  
+  .carouselIndicators {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    z-index: 3;
+  }
+  
+  .indicator {
+    font-size: 1.2rem; /* Larger indicators */
+    margin: 0 var(--spacing-xs);
   }
 }
 
+/* Mobile menu styles */
 @media (max-width: 768px) {
   .mobileMenuBtn {
     display: flex;
@@ -267,17 +412,14 @@
     position: fixed;
     top: 0;
     right: -100%;
-    width: 70%;
+    width: 80%;
     height: 100vh;
-    background-color: white;
+    background-color: var(--color-bg);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-xl);
-    transition: right var(--transition-speed) ease;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 80px 30px 30px;
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-    padding: var(--spacing-xl);
-    z-index: 9;
   }
   
   .navbarRight.open {
@@ -286,41 +428,52 @@
   
   .navbarLink {
     font-size: var(--font-size-lg);
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(107, 77, 50, 0.1);
+    width: 100%;
+    text-align: left;
   }
   
-  .carouselBtn {
-    width: 35px;
-    height: 35px;
+  /* Add Cora Colvin name to the top of the mobile menu */
+  .navbarRight::before {
+    content: "Cora Colvin";
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    font-family: 'Playfair Display', serif;
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  
+  /* Add overlay when menu is open */
+  .menuOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .menuOverlay.open {
+    display: block;
   }
 }
 
 @media (max-width: 480px) {
   .heroOpeningTitle {
-    font-size: 1.75rem;
+    font-size: 2.2rem; /* Still larger than before, but slightly reduced for very small screens */
   }
   
   .heroOpeningSubtitle {
-    font-size: var(--font-size-lg);
-  }
-  
-  .navbarRight {
-    width: 85%;
-  }
-  
-  .carouselImageContainer {
-    aspect-ratio: 1/1;
+    font-size: 1.3rem;
   }
   
   .ctaButton {
     width: 100%;
-    max-width: none;
+    max-width: 280px;
   }
-}
-
-/* Add this class for a scroll effect */
-.navbarScrolled {
-  padding: var(--spacing-sm) 5%;
-  background-color: rgba(249, 245, 240, 0.95);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 4px 20px rgba(107, 77, 50, 0.1);
 }

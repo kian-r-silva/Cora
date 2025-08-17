@@ -1,0 +1,28 @@
+# Node.js dependencies
+node_modules/
+
+# Build output
+.next/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+
+# Misc
+*.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Images and assets (keep public/ tracked)
+!.public/

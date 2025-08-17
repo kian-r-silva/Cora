@@ -1,11 +1,120 @@
 .galleryContainer {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-xl) 5%;
+  background-color: var(--color-bg);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
 }
 
 .sectionTitle {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 5vw, 3rem);
   text-align: center;
-  color: var(--color-primary);
-  margin-bottom: var(--spacing-lg);
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+.sectionTitle:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background-color: var(--color-primary);
+}
+
+/* Gallery grid */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.galleryItem {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  aspect-ratio: 1/1;
+}
+
+.galleryItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.galleryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.galleryItem:hover .galleryImage {
+  transform: scale(1.05);
+}
+
+.galleryCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  padding: var(--spacing-md);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.galleryItem:hover .galleryCaption {
+  transform: translateY(0);
+}
+
+.galleryCaption p {
+  color: white;
+  font-size: var(--font-size-base);
+  margin: 0;
+}
+
+/* Loading and error states */
+.loadingContainer,
+.errorContainer,
+.noContent {
+  text-align: center;
+  margin: var(--spacing-xl) 0;
+  color: var(--color-text-light);
+}
+
+.retryButton {
+  margin-top: var(--spacing-md);
+  padding: 0.5rem 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  transition: background-color 0.3s ease;
+}
+
+.retryButton:hover {
+  background-color: var(--color-primary-dark, #0056b3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .galleryGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+    max-width: 350px;
+    margin: var(--spacing-lg) auto 0;
+  }
 }

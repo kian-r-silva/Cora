@@ -50,6 +50,17 @@ const Services = () => {
                     </div>
                 ))}
             </div>
+            
+            {/* New Call-to-Action section */}
+            <div className={styles.serviceCta}>
+                <h3 className={styles.ctaTitle}>Interested in any of these services?</h3>
+                <p className={styles.ctaText}>
+                    Let's discuss how I can bring my culinary expertise to your kitchen or event.
+                </p>
+                <a href="#contact" className={styles.ctaButton}>
+                    Get in Touch
+                </a>
+            </div>
         </div>
     );
 };

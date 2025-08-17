@@ -57,6 +57,27 @@ If the gallery isn't displaying correctly:
 3. Verify your Sanity credentials in `.env.local` file
 4. Make sure you've published gallery items in Sanity Studio
 
+## Contact Form Setup
+
+The contact form is ready to be connected to an email service:
+
+1. Install an email service package (example with SendGrid):
+```bash
+npm install @sendgrid/mail
+```
+
+2. Add your API key to `.env.local`:
+```
+SENDGRID_API_KEY=your_api_key_here
+```
+
+3. Uncomment and configure the email sending code in `/src/pages/api/contact.js`
+
+Other supported email services:
+- Mailgun: `npm install mailgun.js`
+- AWS SES: `npm install @aws-sdk/client-ses`
+- Nodemailer (for SMTP): `npm install nodemailer`
+
 ## Project Structure
 
 - `/src/components` - React components

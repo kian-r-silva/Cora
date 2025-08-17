@@ -10,6 +10,9 @@ import Services from '../components/Services';
 import Gallery from '../components/Gallery';
 import Contact from '../components/Contact';
 
+// Import the Footer component
+import Footer from '../components/Footer';
+
 const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Recipes', href: '#recipes' },
@@ -135,6 +138,9 @@ const Home = () => {
                     <Contact />
                 </section>
             </main>
+            
+            {/* Add the Footer component here */}
+            <Footer />
         </>
     );
 };

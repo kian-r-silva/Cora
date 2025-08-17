@@ -1,0 +1,104 @@
+.servicesContainer {
+  padding: var(--spacing-xl) 5%;
+  background-color: var(--color-bg);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  text-align: center;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+}
+
+.sectionTitle:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background-color: var(--color-accent);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.serviceCard {
+  background-color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.serviceCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Image container with fixed aspect ratio */
+.serviceImageContainer {
+  width: 100%;
+  aspect-ratio: 1/1;  /* Square aspect ratio */
+  overflow: hidden;
+}
+
+.serviceImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* This crops the image to fit the container */
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.serviceCard:hover .serviceImage {
+  transform: scale(1.05);  /* Subtle zoom effect on hover */
+}
+
+.serviceTitle {
+  font-family: 'Playfair Display', serif;
+  color: var(--color-primary);
+  margin: var(--spacing-md) 0;
+  font-size: var(--font-size-lg);
+  padding: 0 var(--spacing-md);
+  text-align: center;
+}
+
+.serviceDescription {
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  padding: 0 var(--spacing-md) var(--spacing-md);
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .serviceCard {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

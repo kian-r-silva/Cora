@@ -1,45 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styles from '../styles/Home.module.css';
+import Head from 'next/head';
 
-const heroImageUrl = '/Cora Food Opening image.jpeg';
+// Import all section components
+import Hero from '../components/Hero';
+import About from '../components/About';
+import Recipes from '../components/Recipes';
+import Services from '../components/Services';
+import Gallery from '../components/Gallery';
+import Contact from '../components/Contact';
 
-const Home = () => (
-    <main>
-        {/* Hero Section */}
-        <section className="hero-frame-section">
-            <div className="hero-frame">
-                <img src={heroImageUrl} alt="Cora Colvin cooking" className="hero-framed-img" />
-                <div className="hero-overlay-frame">
-                    <h1 className="hero-opening-title">Cora Belle Colvin</h1>
-                    <h2 className="hero-opening-subtitle">Private Chef</h2>
-                    <p className="hero-opening-location">Los Angeles, CA | New York, NY</p>
-                </div>
-            </div>
-        </section>
+const navLinks = [
+    { name: 'About', href: '#about' },
+    { name: 'Recipes', href: '#recipes' },
+    { name: 'Services', href: '#services' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'Contact', href: '#contact' },
+];
 
-        {/* Main Content Section */}
-        <section className="main-content">
-            <div className="hero-section">
-                <h1 className="hero-title">
-                    Cora Belle Colvin
-                </h1>
-                <h2 className="hero-subtitle">
-                    Private Chef &nbsp;|&nbsp; Los Angeles, CA &nbsp;|&nbsp; New York, NY
-                </h2>
-                <blockquote className="hero-quote">
-                    “To be a good cook you have to have a love of the good, a love of hard work, and a love of creating.”<br />
-                    <span className="hero-quote-author">– Julia Child</span>
-                </blockquote>
-                <div>
-                    <a 
-                        href="#contact"
-                        className="cta-button"
+const Home = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+    
+    return (
+        <>
+            <Head>
+                <title>Cora Colvin | Private Chef</title>
+                <meta name="description" content="Private chef services in Los Angeles and New York" />
+            </Head>
+            
+            <main className={styles.mainHome}>
+                {/* Navbar */}
+                <nav className={styles.navbar}>
+                    <div className={styles.navbarLeft}>Cora Colvin</div>
+                    
+                    <button 
+                        className={styles.mobileMenuBtn} 
+                        onClick={() => setMenuOpen(!menuOpen)}
+                        aria-label="Toggle menu"
                     >
-                        Book a Consultation
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-);
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    
+                    <div className={`${styles.navbarRight} ${menuOpen ? styles.open : ''}`}>
+                        {navLinks.map(link => (
+                            <a key={link.name} href={link.href} className={styles.navbarLink}>
+                                {link.name}
+                            </a>
+                        ))}
+                    </div>
+                </nav>
+
+                {/* Hero Section */}
+                <Hero />
+                
+                {/* About Section */}
+                <section id="about">
+                    <About />
+                </section>
+                
+                {/* Recipes Section */}
+                <section id="recipes">
+                    <Recipes />
+                </section>
+                
+                {/* Services Section */}
+                <section id="services">
+                    <Services />
+                </section>
+                
+                {/* Gallery Section */}
+                <section id="gallery">
+                    <Gallery />
+                </section>
+                
+                {/* Contact Section */}
+                <section id="contact">
+                    <Contact />
+                </section>
+            </main>
+        </>
+    );
+};
 
 export default Home;

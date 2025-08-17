@@ -1,7 +1,7 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600&display=swap');
 
-/* CSS Variables for consistent sizing and easy theme changes */
+/* CSS Variables with new color scheme */
 :root {
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -16,12 +16,17 @@
   --font-size-2xl: 2rem;
   --font-size-3xl: 3rem;
   
-  --color-primary: #7a6c5d;
-  --color-primary-light: #a89c8e;
-  --color-accent: #f3ede6;
-  --color-text: #4d463d;
-  --color-text-light: #a89c8e;
-  --color-bg: #f8f5f0;
+  /* New color palette */
+  --color-primary: #5F7D5E;       /* Green */
+  --color-primary-light: #7D9A7C;  /* Lighter green */
+  --color-secondary: #6B4D32;     /* Brown */
+  --color-secondary-light: #8B6C4F; /* Lighter brown */
+  --color-accent: #6A8CAF;        /* Blue */
+  --color-accent-light: #9DB7D3;   /* Lighter blue */
+  --color-bg: #F9F5F0;            /* Cream */
+  --color-bg-alt: #EFE8DD;        /* Slightly darker cream for alternating sections */
+  --color-text: #3A2E24;          /* Dark brown text */
+  --color-text-light: #7C6148;    /* Medium brown text */
   
   --border-radius-sm: 2px;
   --border-radius-md: 4px;
@@ -352,4 +357,35 @@ body {
     .hero-opening-location {
         font-size: 0.95rem;
     }
+}
+
+/* Add to global.css - Section transitions for better flow */
+section {
+  position: relative;
+  transition: background-color 0.5s ease;
+}
+
+section:not(:first-child) {
+  padding-top: var(--spacing-xl);
+}
+
+/* Festive section separators */
+section:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--color-primary), transparent);
+}
+
+/* Subtle parallax effect for depth */
+.bioImage img, .serviceImage, .carouselImg {
+  transition: transform 0.5s ease-out;
+}
+
+.bioImage:hover img, .serviceCard:hover .serviceImage, .carousel:hover .carouselImg {
+  transform: scale(1.03);
 }

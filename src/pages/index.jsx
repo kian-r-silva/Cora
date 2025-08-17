@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
 import Head from 'next/head';
 
@@ -20,6 +20,22 @@ const navLinks = [
 
 const Home = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    
+    // Add scroll detection
+    useEffect(() => {
+        const handleScroll = () => {
+            const isScrolled = window.scrollY > 10;
+            if (isScrolled !== scrolled) {
+                setScrolled(isScrolled);
+            }
+        };
+        
+        document.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            document.removeEventListener('scroll', handleScroll);
+        };
+    }, [scrolled]);
     
     return (
         <>
@@ -29,8 +45,8 @@ const Home = () => {
             </Head>
             
             <main className={styles.mainHome}>
-                {/* Navbar */}
-                <nav className={styles.navbar}>
+                {/* Navbar - add scrolled class conditionally */}
+                <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
                     <div className={styles.navbarLeft}>Cora Colvin</div>
                     
                     <button 
@@ -60,16 +76,16 @@ const Home = () => {
                     <About />
                 </section>
                 
-                {/* Recipes Section */}
-                <section id="recipes">
-                    <Recipes />
-                </section>
-                
                 {/* Services Section */}
                 <section id="services">
                     <Services />
                 </section>
                 
+                {/* Recipes Section */}
+                <section id="recipes">
+                    <Recipes />
+                </section>
+
                 {/* Gallery Section */}
                 <section id="gallery">
                     <Gallery />

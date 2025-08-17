@@ -1,6 +1,6 @@
 .servicesContainer {
+  background-color: var(--color-bg-alt); /* Slightly darker cream for contrast */
   padding: var(--spacing-xl) 5%;
-  background-color: var(--color-bg);
   max-width: var(--container-max-width);
   margin: 0 auto;
 }
@@ -9,7 +9,7 @@
   font-family: 'Playfair Display', serif;
   font-size: clamp(2rem, 5vw, 3rem);
   text-align: center;
-  color: var(--color-primary);
+  color: var(--color-secondary); /* Brown section title */
   margin-bottom: var(--spacing-xl);
   position: relative;
 }
@@ -22,7 +22,7 @@
   transform: translateX(-50%);
   width: 80px;
   height: 2px;
-  background-color: var(--color-accent);
+  background-color: var(--color-primary); /* Green underline */
 }
 
 .servicesGrid {
@@ -35,7 +35,7 @@
 .serviceCard {
   background-color: white;
   border-radius: var(--border-radius-lg);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 20px rgba(107, 77, 50, 0.08); /* Brown-tinted shadow */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -45,7 +45,7 @@
 
 .serviceCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 30px rgba(107, 77, 50, 0.12); /* Deeper brown shadow on hover */
 }
 
 /* Image container with fixed aspect ratio */
@@ -53,6 +53,7 @@
   width: 100%;
   aspect-ratio: 1/1;  /* Square aspect ratio */
   overflow: hidden;
+  border-bottom: 3px solid var(--color-primary); /* Green border under images */
 }
 
 .serviceImage {
@@ -69,7 +70,7 @@
 
 .serviceTitle {
   font-family: 'Playfair Display', serif;
-  color: var(--color-primary);
+  color: var(--color-secondary); /* Brown title */
   margin: var(--spacing-md) 0;
   font-size: var(--font-size-lg);
   padding: 0 var(--spacing-md);
@@ -82,6 +83,28 @@
   line-height: 1.6;
   padding: 0 var(--spacing-md) var(--spacing-md);
   text-align: center;
+}
+
+/* Quote block styles */
+.quoteBlock {
+  font-style: italic;
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--spacing-xl);
+  font-size: var(--font-size-lg);
+  line-height: 1.6;
+  color: var(--color-primary); /* Green quote */
+  position: relative;
+  padding: 0 var(--spacing-lg);
+  font-family: 'Playfair Display', serif;
+}
+
+.quoteAuthor {
+  display: block;
+  margin-top: var(--spacing-xs);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  color: var(--color-secondary-light); /* Lighter brown for author */
 }
 
 /* Responsive design */

@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../styles/Home.module.css';
 import Head from 'next/head';
-
-// Import all section components
+import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import About from '../components/About';
-import Recipes from '../components/Recipes';
 import Services from '../components/Services';
+import Recipes from '../components/Recipes';
 import Gallery from '../components/Gallery';
 import Contact from '../components/Contact';
-
-// Import the Footer component
-import Footer from '../components/Footer';
+import styles from '../styles/Home.module.css';
 
 const navLinks = [
     { name: 'About', href: '#about' },
@@ -69,10 +65,10 @@ const Home = () => {
     }, []);
     
     return (
-        <>
+        <Layout>
             <Head>
                 <title>Cora Colvin | Private Chef</title>
-                <meta name="description" content="Private chef services in Los Angeles and New York" />
+                <meta name="description" content="Private chef services offering customized meal planning, grocery shopping, and culinary experiences." />
             </Head>
             
             <main className={styles.mainHome}>
@@ -125,7 +121,7 @@ const Home = () => {
                 
                 {/* Recipes Section */}
                 <section id="recipes">
-                    <Recipes />
+                    <Recipes featuredOnly={true} maxItems={3} />
                 </section>
 
                 {/* Gallery Section */}
@@ -138,10 +134,7 @@ const Home = () => {
                     <Contact />
                 </section>
             </main>
-            
-            {/* Add the Footer component here */}
-            <Footer />
-        </>
+        </Layout>
     );
 };
 

@@ -1,10 +1,24 @@
-import { createClient } from 'next-sanity'
+import { createClient as createSanityClient } from 'next-sanity'
+import { apiVersion, dataset, projectId } from '../env'
 
-import { apiVersion, dataset, projectId } from '../env.js'
+// Set useCdn directly here instead of importing it
+const useCdn = false
 
-export const client = createClient({
-  projectId,
-  dataset,
+// Export the client instance
+export const client = createSanityClient({
   apiVersion,
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  dataset,
+  projectId,
+  useCdn,
 })
+
+// Export the createClient function
+export const createClient = (config = {}) => {
+  return createSanityClient({
+    apiVersion,
+    dataset,
+    projectId,
+    useCdn,
+    ...config
+  })
+}

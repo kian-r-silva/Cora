@@ -1,6 +1,6 @@
-
-import { galleryItem } from './postType.js'
+import { galleryItem } from './postType'
+import { recipeType } from './recipeType'
 
 export const schema = {
-  types: [galleryItem],
-};
+  types: [galleryItem, recipeType],
+}

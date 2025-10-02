@@ -1,17 +1,8 @@
 # Cora Colvin - Private Chef Portfolio
 
-This is a Next.js portfolio site for Cora Colvin, private chef, featuring a Sanity-powered image gallery.
+This is a Next.js portfolio site for Cora Colvin, private chef, featuring a Sanity-powered image galler and recipe updater. Built for FTP formatted deployment.
 
-## Getting Started
 
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Run the development server:
-```bash
-npm run dev
 ```
 
 3. Open [http://localhost:3000](http://localhost:3000) in your browser.

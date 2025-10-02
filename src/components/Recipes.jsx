@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Recipes.module.css';
-import { createClient } from '../sanity/lib/client';
-import { urlForImage } from '../sanity/lib/image';
+import { fetchFromSanity, urlForImage } from '../lib/sanity';
 import Link from 'next/link';
 import { FaFilePdf } from 'react-icons/fa';
-
-// Set up Sanity client
-const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  useCdn: true,
-  apiVersion: '2023-05-03',
-});
 
 const Recipes = ({ featuredOnly = true, maxItems = 6 }) => {
   const [recipes, setRecipes] = useState([]);
@@ -37,7 +28,7 @@ const Recipes = ({ featuredOnly = true, maxItems = 6 }) => {
           publishedAt
         }`;
         
-        const data = await client.fetch(query);
+        const data = await fetchFromSanity(query);
         setRecipes(data);
         setIsLoading(false);
       } catch (err) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.css';
-import { FaInstagram, FaPinterest, FaLinkedin } from 'react-icons/fa';
+import { FaInstagram, FaPinterest, FaLinkedin, FaFileDownload } from 'react-icons/fa';
+import { fetchFromSanity } from '../lib/sanity';
 
 const imageFiles = [
     'Cora BFast.jpeg',
@@ -55,6 +56,35 @@ function ImageCarousel({ images }) {
 }
 
 const Hero = () => {
+    const [resume, setResume] = useState(null);
+    
+    useEffect(() => {
+        // Fetch resume data from Sanity
+        const fetchResume = async () => {
+            try {
+                const query = `*[_type == "resume" && isActive == true][0] {
+                    title,
+                    buttonText,
+                    "resumeUrl": resumeFile.asset->url,
+                    isActive
+                }`;
+                
+                const data = await fetchFromSanity(query);
+                setResume(data);
+            } catch (err) {
+                console.error('Error fetching resume:', err);
+            }
+        };
+        
+        fetchResume();
+    }, []);
+
+    const handleResumeDownload = () => {
+        if (resume?.resumeUrl) {
+            window.open(resume.resumeUrl, '_blank');
+        }
+    };
+
     return (
         <section className={styles.heroCarouselSection}>
             <div className={styles.heroOverlayFrame}>
@@ -91,6 +121,18 @@ const Hero = () => {
                     >
                         <FaLinkedin className={styles.socialIcon} />
                     </a>
+                    {/* Resume Button */}
+                    {resume && (
+                        <button
+                            onClick={handleResumeDownload}
+                            className={`${styles.socialLink} ${styles.resumeButton}`}
+                            aria-label={`Download ${resume.title}`}
+                            title={`Download ${resume.title}`}
+                        >
+                            <FaFileDownload className={styles.socialIcon} />
+                            <span className={styles.resumeText}>{resume.buttonText}</span>
+                        </button>
+                    )}
                 </div>
                 
                 <blockquote className={styles.heroQuote}>

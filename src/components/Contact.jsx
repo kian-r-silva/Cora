@@ -61,35 +61,45 @@ const Contact = () => {
             setFormErrors(errors);
             return;
         }
-        
+
         // Set loading state
         setFormStatus({
             submitted: false,
             error: false,
             message: 'Sending message...',
         });
-        
+
         try {
-            // Send form data to the API endpoint
-            const response = await fetch('/api/contact', {
+            // Option 1: Formspree (recommended for static sites)
+            // Replace 'your-form-id' with your actual Formspree form ID
+            const response = await fetch('https://formspree.io/f/mnnbwwkl', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.phone,
+                    inquiryType: formData.inquiryType,
+                    guestCount: formData.guestCount,
+                    eventType: formData.eventType,
+                    message: formData.message,
+                    _replyto: formData.email, // Formspree will use this for replies
+                }),
             });
-            
-            // Check if the request was successful
+
             if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Error submitting form');
+                throw new Error('Network response was not ok');
             }
-            
+
             // Success state
             setFormStatus({
                 submitted: true,
                 error: false,
                 message: 'Thank you for your message! I will get back to you soon.',
             });
-            
+
             // Reset form after successful submission
             setFormData({
                 name: '',
@@ -100,15 +110,44 @@ const Contact = () => {
                 eventType: '',
                 message: '',
             });
-            
+
         } catch (error) {
-            // Error state
+            // Fallback to mailto if service fails
+            console.log('Form service failed, falling back to mailto:', error);
+            
+            const subject = `New ${formData.inquiryType} inquiry from ${formData.name}`;
+            const body = `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Inquiry Type: ${formData.inquiryType}
+Guest Count: ${formData.guestCount || 'Not provided'}
+Event Type: ${formData.eventType || 'Not provided'}
+
+Message:
+${formData.message}
+            `.trim();
+            
+            const mailtoUrl = `mailto:cora@coracolvin.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoUrl;
+            
+            // Show fallback message
             setFormStatus({
-                submitted: false,
-                error: true,
-                message: 'There was a problem sending your message. Please try again later.',
+                submitted: true,
+                error: false,
+                message: 'Your email client should open with the message pre-filled. Please send it to complete your inquiry.',
             });
-            console.error('Form submission error:', error);
+
+            // Reset form
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                inquiryType: '',
+                guestCount: '',
+                eventType: '',
+                message: '',
+            });
         }
     };
     

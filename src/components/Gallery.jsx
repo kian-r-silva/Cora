@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../styles/Gallery.module.css';
-import { client } from '../sanity/lib/client';
-import { urlForImage } from '../sanity/lib/image'; // Changed from urlFor to urlForImage
+import { fetchFromSanity, urlForImage } from '../lib/sanity';
 
 const Gallery = () => {
     const [galleryItems, setGalleryItems] = useState([]);
@@ -18,7 +17,7 @@ const Gallery = () => {
                     altText
                 }`;
                 
-                const data = await client.fetch(query);
+                const data = await fetchFromSanity(query);
                 setGalleryItems(data);
                 setIsLoading(false);
             } catch (err) {

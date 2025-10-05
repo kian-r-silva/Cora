@@ -159,8 +159,7 @@ ${formData.message}
                 <div className={styles.contactInfo}>
                     <h3>Book Your Private Chef Experience</h3>
                     <p>
-                        Ready to elevate your dining experience? Fill out the form or reach out 
-                        directly to discuss your event needs, menu preferences, or any dietary requirements.
+                        Fill out the form or reach out directly to discuss your event needs, menu preferences, or any dietary requirements.
                     </p>
                     
                     <div className={styles.contactDetails}>

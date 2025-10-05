@@ -29,12 +29,6 @@ const Services = () => {
     return (
         <div className={styles.servicesContainer}>
             <h2 className={styles.sectionTitle}>Services</h2>
-            
-            <blockquote className={styles.quoteBlock}>
-                "You don't have to cook fancy or complicated masterpieces — just food from fresh ingredients."
-                <span className={styles.quoteAuthor}>— Julia Child</span>
-            </blockquote>
-            
             <div className={styles.servicesGrid}>
                 {servicesData.map((service, index) => (
                     <div key={index} className={styles.serviceCard}>

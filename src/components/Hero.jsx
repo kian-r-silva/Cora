@@ -134,11 +134,6 @@ const Hero = () => {
                         </button>
                     )}
                 </div>
-                
-                <blockquote className={styles.heroQuote}>
-                    "To be a good cook you have to have a love of the good, a love of hard work, and a love of creating."<br />
-                    <span className={styles.heroQuoteAuthor}>– Julia Child</span>
-                </blockquote>
             </div>
             <div className={styles.carouselFrame}>
                 <ImageCarousel images={imageFiles} />
